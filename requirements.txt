@@ -1,0 +1,10 @@
+# ============================================================
+# requirements.txt — PropGuard
+# Dépendances Python du projet PropGuard.
+# Installer avec : pip install -r requirements.txt
+# ============================================================
+
+pydantic>=2.6     # Validation des données de config et des signaux (modèles typés)
+PyYAML>=6.0       # Lecture du fichier de configuration YAML (règles du firm)
+pytest>=8.0       # Exécution des tests unitaires du projet
+pandas>=2.2       # Analyse des résultats de backtest (manipulation de données)

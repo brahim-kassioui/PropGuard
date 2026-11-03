@@ -1,0 +1,13 @@
+# ============================================================
+# .gitignore — PropGuard
+# Fichiers et dossiers à exclure du versionnement Git.
+# ============================================================
+
+.venv/            # Environnement virtuel Python (ne pas versionner)
+__pycache__/      # Cache de bytecode Python généré automatiquement
+*.pyc             # Fichiers compilés Python
+.env              # Variables d'environnement / secrets (ne jamais committer)
+data/             # Données locales (bases SQLite, CSV d'audit, etc.)
+logs/             # Fichiers de logs générés à l'exécution
+*.ex5             # Fichiers compilés MQL5 (binaires MetaTrader 5)
+.vscode/          # Configuration locale de VS Code (spécifique à la machine)

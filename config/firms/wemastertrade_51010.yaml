@@ -1,0 +1,46 @@
+# ============================================================
+# PropGuard — Configuration du firm et des règles
+# Ce fichier définit les règles du firm prop (WeMasterTrade)
+# et les paramètres de sécurité/risque utilisés par PropGuard.
+# ============================================================
+
+firm: WeMasterTrade                 # Nom du firm prop trading
+account_type: InstantFunding        # Type de compte : Instant Funding (pas de challenge en 2 étapes)
+account_size: 5000                  # Taille du compte en devise (5 000 USD)
+currency: USD                       # Devise du compte
+
+# ------------------------------------------------------------
+# RÈGLES OFFICIELLES DU FIRM
+# ------------------------------------------------------------
+rules:
+  daily_loss_pct: 5.0               # Perte journalière max autorisée : 5% (250 USD sur 5 000)
+  max_loss_pct: 10.0                # Perte maximale totale : 10% (500 USD sur 5 000)
+  profit_target_pct: 10.0           # Objectif de profit : 10% (500 USD sur 5 000)
+  drawdown_type: static             # Type de drawdown : statique (basé sur le solde initial, pas trailing)
+  drawdown_basis: balance           # Base de calcul : balance (solde), pas equity
+  allow_weekend_holding: true       # Autorisation de garder les positions le week-end
+  allow_news_trading: true          # Autorisation de trader pendant les news (WeMasterTrade l'autorise)
+  news_blackout_minutes: 5          # Fenêtre de blocage news : 5 minutes avant/après une news à fort impact
+  consistency_rule_pct: null        # Règle de consistance : null = pas de règle imposée par le firm
+  min_trading_days: null            # Nombre minimum de jours de trading : null = pas de minimum
+  force_close_time: null            # Heure de fermeture forcée : null = pas de fermeture forcée
+  ea_allowed: true                  # Expert Advisors (EAs) autorisés : true = oui
+
+# ------------------------------------------------------------
+# BUFFERS DE SÉCURITÉ (marges internes de PropGuard)
+# PropGuard s'arrête AVANT la limite officielle pour éviter
+# l'invalidation du compte par slippage ou gap.
+# ------------------------------------------------------------
+safety_buffers:
+  daily_buffer_pct: 1.5             # Marge sur la perte journalière : arrêt à 3.5% au lieu de 5%
+  max_buffer_pct: 3.0               # Marge sur la perte max : arrêt à 7% au lieu de 10%
+
+# ------------------------------------------------------------
+# PARAMÈTRES DE RISQUE (utilisés par PropGuard pour le sizing)
+# ------------------------------------------------------------
+risk:
+  risk_per_trade_pct: 0.5           # Risque par trade : 0.5% du capital (25 USD sur 5 000)
+  max_open_positions: 2             # Nombre maximum de positions ouvertes simultanément
+  sl_atr_mult: 1.5                  # Stop-loss = ATR × 1.5 (distance du SL)
+  tp_atr_mult: 3.0                  # Take-profit = ATR × 3.0 (ratio risque/récompense 1:2)
+  max_trades_per_day: 5             # Nombre maximum de trades par jour
